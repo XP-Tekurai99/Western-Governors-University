@@ -138,7 +138,8 @@ string Student::getDegreeProgram(string str)
 	else if (degreeProgram == SOFTWARE) {
 		return "SOFTWARE";
 	}
-	else { // didn't match anything else, set it UNDECLARED
+	else
+	{ // degreeProgram is set to UNDECLARED if no match is found
 		return "UNDECLARED";
 	}
 }
