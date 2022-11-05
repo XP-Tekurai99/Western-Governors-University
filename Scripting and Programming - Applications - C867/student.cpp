@@ -1,174 +1,186 @@
 #include <iostream>
 //#include <cctype>
 //#include <vector>
-//#include <array>
 #include <string>
 
-#include "roster.h"
-
+#include "student.h"
 using namespace std;
 
-Roster::Roster()
+Student::Student(string XstudentID, string XfirstName, string XlastName, string XemailAddress, int Xage,
+	int XdaysInCourse[3], DegreeProgram XdegreeProgram)
+{
+	//setStudentID(XstudentID);
+	//setFirstName(XfirstName);
+	//setLastName(XlastName);
+	//setEmailAddress(XemailAddress);
+	//setAge(Xage);
+	//setDaysInCourse(XdaysInCourse);
+	//setDegreeProgram(XdegreeProgram);
+
+	studentID = XstudentID;
+	firstName = XfirstName;
+	lastName = XlastName;
+	emailAddress = XemailAddress;
+	age = Xage;
+	// daysInCourse = XdaysInCourse;
+	for (int i = 0; i < 3; i++) {
+		daysInCourse[i] = XdaysInCourse[i];
+	}
+	degreeProgram = XdegreeProgram;
+}
+
+Student::~Student()
 {
 }
 
-Roster::~Roster()
+string Student::getStudentID()
 {
-	// Deletes the students in the Roster
+	return studentID;
+}
+
+void Student::setStudentID(string newStudentID)
+{
+	studentID = newStudentID;
+}
+
+string Student::getFirstName()
+{
+	return firstName;
+}
+
+void Student::setFirstName(string newFirstName)
+{
+	firstName = newFirstName;
+}
+
+string Student::getLastName()
+{
+	return lastName;
+}
+
+void Student::setLastName(string newLastName)
+{
+	lastName = newLastName;
+}
+
+string Student::getEmailAddress()
+{
+	return emailAddress;
+}
+
+void Student::setEmailAddress(string newEmailAddress)
+{
+	emailAddress = newEmailAddress;
+}
+
+int Student::validateEmailAddress()
+{
+	/*
+	For this assignment:
+	"Note: A valid email should include an at sign ('@') and period ('.') and should not include a space (' ')."
+	according to that, I suppose the period could be before the at symbol but the ...
+	*/
+
+	if (emailAddress.find("@") == string::npos) { // no "@" found
+		return 1;
+	}
+	if (emailAddress.find(".") == string::npos) { // no "." found
+		return 1;
+	}
+	if (emailAddress.find(" ") != string::npos) { // found a space " "
+		return 1;
+	}
+	return 0;
+}
+
+int Student::getAge()
+{
+	return age;
+}
+
+void Student::setAge(int newAge)
+{
+	age = newAge;
+}
+
+int* Student::getDaysInCourse()
+{
+	return daysInCourse;
+}
+
+void Student::setDaysInCourse(int* XdaysInCourse)
+{
+	//daysInCourse = daysInCourse;
+	for (int i = 0; i < 3; i++) {
+		daysInCourse[i] = XdaysInCourse[i];
+	}
+
+}
+
+void Student::setDaysInCourse(int index, int days)
+{
+	daysInCourse[index] = days;
+}
+
+DegreeProgram Student::getDegreeProgram()
+{
+	return degreeProgram;
+}
+
+string Student::getDegreeProgram(string str)
+{
+	if (degreeProgram == SECURITY) {
+		return "SECURITY";
+	}
+	else if (degreeProgram == NETWORK) {
+		return "NETWORK";
+	}
+	else if (degreeProgram == SOFTWARE) {
+		return "SOFTWARE";
+	}
+	else { // didn't match anything else, set it UNDECLARED
+		return "UNDECLARED";
+	}
+}
+
+void Student::setDegreeProgram(DegreeProgram newDegProg)
+{
+	degreeProgram = newDegProg;
+}
+
+void Student::print() // student data in tab seperated format //don't use get/set use direct access
+//c. public void printAll() that prints a complete tab-separated list of student data in the provided
+//   format:
+//   A1 [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab]
+//   daysInCourse: {35, 40, 55} Degree Program: Security.
+{
 	int i = 0;
-	for (i = 0; i < ROSTER_SIZE; i++)
+	string foo = "foo";
+
+	cout << studentID << "\t" <<
+		"First Name: " << firstName << "\t" <<
+		"Last Name: " << lastName << "\t" <<
+		"Age: " << age << "\t" <<
+		"daysInCourse: {" << "\t";
+	cout << daysInCourse[i];
+
+	for (int i = 1; i < MAX_COURSES; i++)
 	{
-		delete classRosterArray[i];
-		classRosterArray[i] = nullptr;
+		cout << ", " << daysInCourse[i];
 	}
+
+	cout << "}\tDegree Program: " << getDegreeProgram(foo) << "." << endl;
 }
 
-void Roster::add(string studentID,
-	string firstName,
-	string lastName,
-	string emailAddress,
-	int age,
-	int daysInCourse1,
-	int daysInCourse2,
-	int daysInCourse3,
-	DegreeProgram degreeprogram)
-{
-	// E3:  public void add(string studentID,
-	// string firstName, string lastName, string emailAddress, int age, int daysInCourse1,
-	// int daysInCourse2, int daysInCourse3, DegreeProgram degreeprogram)
-	// sets the instance variables from D1 and updates the roster
-
-	int courseDays[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
-
-	for (int i = 0; i < ROSTER_SIZE; i++) {
-		if (classRosterArray[i] == nullptr) {
-			classRosterArray[i] = new Student(studentID,
-				firstName,
-				lastName,
-				emailAddress,
-				age,
-				courseDays,
-				degreeprogram);
-			break;
-		}
-	}
-
-}
-
-void Roster::remove(string studentID)
-{
-	// E3b:  public void remove(string studentID) removes students from the roster by student ID.
-	// If the student ID does not exist, the function prints an error message
-
-	int i = 0;
-	bool j = false;
-	for (i = 0; i < ROSTER_SIZE; i++) {
-		if (classRosterArray[i] == nullptr) {
-		}
-		else {
-			if (classRosterArray[i]->getStudentID() == studentID) {
-				delete classRosterArray[i];
-				classRosterArray[i] = nullptr;
-				j = true;
-			}
-		}
-	}
-	if (j == false) {
-		cout << "ERROR - Student: " << studentID << " not found." << endl;
-	}
-}
-
-void Roster::printAll()
-{
-	// E3c: public void printAll() prints a complete tab-separated list of student data in the provided format:
-	// [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab] daysInCourse: {35, 40, 55} Degree Program: Security
-	// The printAll() function should loop through all the students in classRosterArray and call the print() function for each student
-
-	int i = 0;
-	//cout << "This class conatins these students:" << endl;
-	for (i = 0; i < ROSTER_SIZE; i++) {
-		if (classRosterArray[i] == nullptr) {
-		}
-		else {
-			classRosterArray[i]->print();
-		}
-	}
-}
-
-void Roster::printAverageDaysInCourse(string studentID)
-{
-	// E3d: public void printAverageDaysInCourse(string studentID) prints a student’s average
-	// number of days in the three courses.The student is identified by the studentID parameter.
-
-	int stuIDX;
-
-	for (int i = 0; i < ROSTER_SIZE; i++) {
-		if (classRosterArray[i]->getStudentID() == studentID) {
-			stuIDX = i;
-		}
-	}
-	cout << "Student " << classRosterArray[stuIDX]->getStudentID() << " "
-		<< " has averaged "
-		<< classRosterArray[stuIDX]->getAverageDaysInCourses()
-		<< " day(s) per course for the last three courses." << endl;
-}
-
-void Roster::printInvalidEmails()
-{
-	// E3e: public void printInvalidEmails() verifies student email addresses and
-	// displays all invalid email addresses to the user
-
-	int i = 0;
-	cout << "Invalid email addresses:" << endl;
-	for (i = 0; i < ROSTER_SIZE; i++) {
-		if (classRosterArray[i]->validateEmailAddress() == 1) {
-			cout << classRosterArray[i]->getEmailAddress() << endl;
-		}
-	}
-}
-
-void Roster::printByDegreeProgram(DegreeProgram byDegreeProgram)
-{
-	// E3f: public void printByDegreeProgram(DegreeProgram degreeProgram) prints out
-	// student information for a degree program specified by an enumerated type
-
-	int i = 0;
-	for (i = 0; i < ROSTER_SIZE; i++) {
-		if (classRosterArray[i]->getDegreeProgram() == byDegreeProgram) {
-			classRosterArray[i]->print();
-		}
-	}
-}
-
-void Roster::printByDegreeProgram()
+float Student::getAverageDaysInCourses()
 {
 	int i = 0;
-	int j = 0;
-	for (i = 0; i < ROSTER_SIZE; i++) {
-		for (j = 0; j < ROSTER_SIZE; j++) {
-			if (classRosterArray[i]->getDegreeProgram() == NETWORK) {
-				classRosterArray[i]->print();
-			}
-		}
-		for (j = 0; j < ROSTER_SIZE; j++) {
-			if (classRosterArray[i]->getDegreeProgram() == SECURITY) {
-				classRosterArray[i]->print();
-			}
-		}
-		for (j = 0; j < ROSTER_SIZE; j++) {
-			if (classRosterArray[i]->getDegreeProgram() == SOFTWARE) {
-				classRosterArray[i]->print();
-			}
-		}
-		for (j = 0; j < ROSTER_SIZE; j++) {
-			if (classRosterArray[i]->getDegreeProgram() == UNDECLARED) {
-				classRosterArray[i]->print();
-			}
-		}
-	}
-}
+	int sum = 0;
 
-string Roster::getSID(int studentNo)
-{
-	return classRosterArray[studentNo]->getStudentID();
+	for (i = 0; i < MAX_COURSES; i++)
+	{
+		sum = sum + daysInCourse[i];
+	}
+
+	return static_cast<float>(sum) / static_cast<float>(MAX_COURSES);
 }
