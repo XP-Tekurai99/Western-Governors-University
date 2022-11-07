@@ -5,12 +5,15 @@
 ## Computer Science Program
 Earning a bachelor’s degree in Computer Science online designed by industry experts combines theoretical depth and technical know-how, all adding to the practical knowledge acquired through experience and certifications.
 
-### Courses
+### Courses and Competencies
 * Computer Science
   * Computer Architecture
 * Software
   * Scripting and Programming - Applications
 * Data Management
+  * Data Management - Foundations
+  * Data Management - Applications
+  * Adavanced Data Management
 * Secure Systems Analysis and Design
 
 ## Languages, Libraries, and Frameworks
