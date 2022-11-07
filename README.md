@@ -6,11 +6,12 @@
 Earning a bachelor’s degree in Computer Science online designed by industry experts combines theoretical depth and technical know-how, all adding to the practical knowledge acquired through experience and certifications.
 
 ### Courses
-* Solidity Path: Beginner to Intermediate Smart Contracts
-  * fd
-* Chainlink Path: Decentralized Oracles
-* Advanced Solidity Path: Get In-depth Knowledge
-* Beyond Ethereum Path: Explore the Blockchain Ecosystem
+* Computer Science
+  * Computer Architecture
+* Software
+  * Scripting and Programming - Applications
+* Data Management
+* Secure Systems Analysis and Design
 
 ## Languages, Libraries, and Frameworks
 
