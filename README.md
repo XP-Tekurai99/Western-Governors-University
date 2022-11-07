@@ -1,17 +1,13 @@
 # Western Governors University
 
-## Solidity Projects from CryptoZombies
+![image](https://user-images.githubusercontent.com/110959584/200244011-317371af-00ee-4c39-8ccf-66b94f9ef0c9.png)
 
-CryptoZombies is an interactive school that teaches all things technical about blockchains. Learn to write smart contracts by making a crypto-collectibles game.
-
-### Interactive Coding Lessons
-In-browser step-by-step lessons teach the very basics of Solidity to help create a fully-functional blockchain-based game.
-
-### Course Completion NFTs
-Personalized NFT certificates are given for each course completed.
+## Computer Science Program
+Earning a bachelor’s degree in Computer Science online designed by industry experts combines theoretical depth and technical know-how, all adding to the practical knowledge acquired through experience and certifications.
 
 ### Courses
 * Solidity Path: Beginner to Intermediate Smart Contracts
+  * fd
 * Chainlink Path: Decentralized Oracles
 * Advanced Solidity Path: Get In-depth Knowledge
 * Beyond Ethereum Path: Explore the Blockchain Ecosystem
